@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { api } from '../api';
+import { api, MEDIA_URL } from '../api';
 
 export function ReviewsSection() {
   const [reviews, setReviews] = useState([]);
@@ -20,7 +20,7 @@ export function ReviewsSection() {
             <div key={review.id} className="review-card">
   {review.image && (
     <img
-      src={review.image}
+      src={review.image?.startsWith('http') ? review.image : `${MEDIA_URL}${review.image} `}
       alt={review.name}
       style={{ width: '70px', height: '70px', borderRadius: '50%', objectFit: 'cover', display: 'block', margin: '0 auto 16px auto', border: '3px solid var(--primary)' }}
     />

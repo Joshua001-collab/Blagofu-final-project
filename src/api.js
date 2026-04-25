@@ -1,4 +1,5 @@
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+export const MEDIA_URL = import.meta.env.VITE_MEDIA_URL || 'http://localhost:5000'
 
 async function fetchAPI(path, options = {}) {
   const url = `${API_URL}${path}`;

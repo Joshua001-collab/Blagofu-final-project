@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { api } from '../api';
+import { api, MEDIA_URL } from '../api';
 
 export function ProductsSection({ settings }) {
   const [products, setProducts] = useState([]);
@@ -27,7 +27,7 @@ export function ProductsSection({ settings }) {
               <div key={product.id} className="product-card">
                 {product.image && (
                   <img 
-                    src={product.image} 
+                    src={product.image?.startsWith('http') ? product.image : `${MEDIA_URL}${product.image}`} 
                     alt={product.name} 
                     className="product-image"
                     loading="lazy"
