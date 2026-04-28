@@ -25,10 +25,10 @@ export default function Home() {
     <div>
       {hero?.image && (
         <img
-  src={`data:${hero.contentType};base64,${hero.image}`}
-  alt="background"
-  className="page-bg"
-/>
+          src={`data:${hero.contentType};base64,${hero.image}`}
+          alt="background"
+          className="page-bg"
+        />
       )}
       <div className="bg-overlay" />
       <main>
@@ -39,7 +39,10 @@ export default function Home() {
       </main>
       <footer className="footer">
         <div className="container">
-          © {new Date().getFullYear()} {settings?.siteTitle || 'BLAGOFU.K'}. All rights reserved.
+          <div className="footer-brand">{settings?.siteTitle || 'BLAGOFU.K'}</div>
+          <div className="footer-copy">
+            © {new Date().getFullYear()} {settings?.siteTitle || 'BLAGOFU.K'}. All rights reserved. · Premium Nigerian Fashion
+          </div>
         </div>
       </footer>
     </div>
