@@ -1,14 +1,17 @@
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-export const MEDIA_URL = import.meta.env.VITE_MEDIA_URL || 'http://localhost:5000'
 
 async function fetchAPI(path, options = {}) {
   const url = `${API_URL}${path}`;
+  const token = localStorage.getItem('blagofuk_admin');
+
   const res = await fetch(url, {
     ...options,
     headers: {
       ...(options.headers || {}),
+      ...(token ? { Authorization: 'Bearer blagofuk-admin-token' } : {}),
     },
   });
+
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
     throw new Error(err.message || `HTTP ${res.status}`);
@@ -24,7 +27,7 @@ export const api = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password }),
     }),
-  
+
   changePassword: (currentPassword, newPassword) =>
     fetchAPI('/api/auth/password', {
       method: 'PUT',
@@ -36,7 +39,7 @@ export const api = {
   getHero: () => fetchAPI('/api/hero'),
   updateHero: (formData) =>
     fetchAPI('/api/hero', {
-      method: 'PUT',
+      method: 'POST',
       body: formData,
     }),
 
@@ -58,15 +61,15 @@ export const api = {
   // Reviews
   getReviews: () => fetchAPI('/api/reviews'),
   createReview: (formData) =>
-  fetchAPI('/api/reviews', {
-    method: 'POST',
-    body: formData,
-  }),
-updateReview: (id, formData) =>
-  fetchAPI(`/api/reviews/${id}`, {
-    method: 'PUT',
-    body: formData,
-  }),
+    fetchAPI('/api/reviews', {
+      method: 'POST',
+      body: formData,
+    }),
+  updateReview: (id, formData) =>
+    fetchAPI(`/api/reviews/${id}`, {
+      method: 'PUT',
+      body: formData,
+    }),
   deleteReview: (id) =>
     fetchAPI(`/api/reviews/${id}`, { method: 'DELETE' }),
 
