@@ -404,8 +404,11 @@ const saveReview = async (e) => {
                   <label className="admin-form-label">Product Image</label>
                   <input className="glass-input" name="image" type="file" accept="image/*" />
                   {editingProduct.image && (
-                    <img src={editingProduct.image} alt="preview" className="admin-image-preview" />
-                  )}
+  <img
+    src={`data:${editingProduct.contentType};base64,${editingProduct.image}`}
+    className="admin-image-preview"
+  />
+)}
                 </div>
                 <div className="modal-actions">
                   <button type="button" className="glass-btn" onClick={() => setEditingProduct(null)}>Cancel</button>
@@ -428,7 +431,7 @@ const saveReview = async (e) => {
                   {data.products.map(p => (
                     <tr key={p.id}>
                       <td>
-                        {p.image ? <img src={p.image} alt={p.name} style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '8px' }} /> : <span style={{ color: 'var(--text-muted)' }}>No image</span>}
+                        {p.image ? <img src={`data:${p.contentType};base64,${p.image}`} alt={p.name} style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '8px' }} /> : <span style={{ color: 'var(--text-muted)' }}>No image</span>}
                       </td>
                       <td>{p.name}</td>
                       <td>{p.price ? `₦${p.price}` : <span style={{ color: 'var(--text-muted)' }}>-</span>}</td>

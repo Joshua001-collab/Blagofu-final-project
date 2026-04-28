@@ -26,13 +26,13 @@ export function ProductsSection({ settings }) {
             {products.map(product => (
               <div key={product.id} className="product-card">
                 {product.image && (
-                  <img 
-                    src={product.image?.startsWith('http') ? product.image : `${MEDIA_URL}${product.image}`} 
-                    alt={product.name} 
-                    className="product-image"
-                    loading="lazy"
-                  />
-                )}
+  <img 
+    src={`data:${product.contentType};base64,${product.image}`}
+    alt={product.name} 
+    className="product-image"
+    loading="lazy"
+  />
+)}
                 <div className="product-info">
                   <h3 className="product-name">{product.name}</h3>
                   {product.description && (

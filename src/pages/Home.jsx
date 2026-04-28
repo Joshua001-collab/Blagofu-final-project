@@ -24,7 +24,11 @@ export default function Home() {
   return (
     <div>
       {hero?.image && (
-        <img src={hero.image} alt="background" className="page-bg" />
+        <img
+  src={`data:${hero.contentType};base64,${hero.image}`}
+  alt="background"
+  className="page-bg"
+/>
       )}
       <div className="bg-overlay" />
       <main>
