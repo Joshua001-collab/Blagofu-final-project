@@ -428,21 +428,21 @@ const saveReview = async (e) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data.products.map(p => (
-                    <tr key={p.id}>
-                      <td>
-                        {p.image ? <img src={`data:${p.contentType};base64,${p.image}`} alt={p.name} style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '8px' }} /> : <span style={{ color: 'var(--text-muted)' }}>No image</span>}
-                      </td>
-                      <td>{p.name}</td>
-                      <td>{p.price ? `₦${p.price}` : <span style={{ color: 'var(--text-muted)' }}>-</span>}</td>
-                      <td>
-                        <div style={{ display: 'flex', gap: '8px' }}>
-                          <button className="glass-btn" style={{ padding: '8px 14px', fontSize: '0.85rem' }} onClick={() => setEditingProduct(p)}>Edit</button>
-                          <button className="glass-btn glass-btn-danger" style={{ padding: '8px 14px', fontSize: '0.85rem' }} onClick={() => deleteProduct(p.id)}>Delete</button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
+                 {data.products.map(p => (
+  <tr key={p._id || p.id}>
+    <td>
+      {p.image ? <img src={`data:${p.contentType};base64,${p.image}`} alt={p.name} style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '8px' }} /> : <span style={{ color: 'var(--text-muted)' }}>No image</span>}
+    </td>
+    <td>{p.name}</td>
+    <td>{p.price ? `₦${p.price}` : <span style={{ color: 'var(--text-muted)' }}>-</span>}</td>
+    <td>
+      <div style={{ display: 'flex', gap: '8px' }}>
+        <button className="glass-btn" style={{ padding: '8px 14px', fontSize: '0.85rem' }} onClick={() => setEditingProduct(p)}>Edit</button>
+        <button className="glass-btn glass-btn-danger" style={{ padding: '8px 14px', fontSize: '0.85rem' }} onClick={() => deleteProduct(p._id || p.id)}>Delete</button>
+      </div>
+    </td>
+  </tr>
+))}
                 </tbody>
               </table>
               {data.products.length === 0 && (
